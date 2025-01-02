@@ -70,6 +70,8 @@ class Battle::AI::AIBattler
       ret += [self.totalhp / 16, 1].max if battler.takesHailDamage?
     when :ShadowSky
       ret += [self.totalhp / 16, 1].max if battler.takesShadowSkyDamage?
+    when :DivineStorm
+      ret += [self.totalhp / 16, 1].max if battler.takesDivineStormDamage?
     end
     case ability_id
     when :DRYSKIN

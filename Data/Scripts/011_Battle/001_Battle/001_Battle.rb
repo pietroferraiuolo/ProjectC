@@ -725,6 +725,7 @@ class Battle
     when :HeavyRain   then pbDisplay(_INTL("A heavy rain began to fall!"))
     when :StrongWinds then pbDisplay(_INTL("Mysterious strong winds are protecting Flying-type Pokémon!"))
     when :ShadowSky   then pbDisplay(_INTL("A shadow sky appeared!"))
+    when :DivineStorm then pbDisplay(_INTL("A lighning storm is raging!"))
     end
     # Check for end of primordial weather, and weather-triggered form changes
     allBattlers.each { |b| b.pbCheckFormOnWeatherChange }
@@ -732,7 +733,6 @@ class Battle
   end
 
   def pbEndPrimordialWeather
-    return if @field.weather == @field.defaultWeather
     oldWeather = @field.weather
     # End Primordial Sea, Desolate Land, Delta Stream
     case @field.weather

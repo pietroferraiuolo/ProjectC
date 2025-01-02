@@ -305,6 +305,13 @@ class Battle::AI::AIMove
            function_code != "UseTargetDefenseInsteadOfTargetSpDef"   # Psyshock
           multipliers[:defense_multiplier] *= 1.5
         end
+      when :DivineStorm
+        case calc_type
+        when :ELECTRIC
+          multipliers[:final_damage_multiplier] *= 1.5
+        when :GROUND
+          multipliers[:final_damage_multiplier] /= 2
+        end
       end
     end
     # Critical hits

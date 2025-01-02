@@ -163,3 +163,16 @@ GameData::Weather.register({
   :tile_delta_y     => 0,
   :graphics         => [nil, ["fog_tile"]]
 })
+
+# NOTE: This randomly flashes the screen in RPG::Weather#update.
+GameData::Weather.register({
+  :id               => :DivineStorm,
+  :id_number        => 9,   
+  :category         => :Rain,
+  :graphics         => [["storm_1", "storm_2", "storm_3", "storm_4"]],   # Last is splash
+  :particle_delta_x => -500,
+  :particle_delta_y => 2000,
+  :tone_proc        => proc { |strength|
+    next Tone.new(-strength / 2, -strength / 2, 0, 20)
+  }
+})

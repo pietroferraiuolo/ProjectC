@@ -1527,6 +1527,8 @@ class Battle::Move::TypeAndPowerDependOnWeather < Battle::Move
       ret = :ROCK if GameData::Type.exists?(:ROCK)
     when :Hail
       ret = :ICE if GameData::Type.exists?(:ICE)
+    when :DivineStorm
+      ret = :ELECTRIC if GameData::Type.exists?(:ELECTRIC)
     when :ShadowSky
       ret = :NONE
     end
@@ -1539,6 +1541,7 @@ class Battle::Move::TypeAndPowerDependOnWeather < Battle::Move
     hitNum = 2 if t == :WATER
     hitNum = 3 if t == :ROCK
     hitNum = 4 if t == :ICE
+    hitNum = 5 if t == :ELECTRIC
     super
   end
 end

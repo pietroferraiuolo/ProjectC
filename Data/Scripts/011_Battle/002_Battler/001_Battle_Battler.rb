@@ -558,6 +558,14 @@ class Battle::Battler
     return true
   end
 
+  def takesDivineStormDamage?
+    return false if !takesIndirectDamage?
+    return false if pbHasType?(:ELECTRIC) || pbHasType?(:GROUND)
+    return false if inTwoTurnAttack?("TwoTurnAttackInvulnerableUnderground")
+    return false if hasActiveAbility([:LIGHTNINGROD, :LEVITATE, :DIVINESTORM])
+    return false if hasActiveItem?([:AIRBALLOON])
+    return true
+    
   def effectiveWeather
     ret = @battle.pbWeather
     ret = :None if [:Sun, :Rain, :HarshSun, :HeavyRain].include?(ret) && hasActiveItem?(:UTILITYUMBRELLA)

@@ -232,6 +232,27 @@ Battle::AI::Handlers::MoveEffectScore.add("StartSandstormWeather",
 #===============================================================================
 #
 #===============================================================================
+Battle::AI::Handlers::MoveFailureCheck.copy("StartHeavyRainWeather",
+                                            "DivineStormWeather")
+Battle::AI::Handlers::MoveEffectScore.add("StartDivineStormWeather",
+  proc { |score, move, user, ai, battle|
+    next Battle::AI::MOVE_USELESS_SCORE if battle.pbCheckGlobalAbility(:AIRLOCK) ||
+                                           battle.pbCheckGlobalAbility(:CLOUDNINE)
+    # Not worth it at lower HP
+    if ai.trainer.has_skill_flag?("HPAware")
+      score -= 10 if user.hp < user.totalhp / 2
+    end
+    if ai.trainer.high_skill? && battle.field.weather != :None
+      score -= ai.get_score_for_weather(battle.field.weather, user)
+    end
+    score += ai.get_score_for_weather(:DivineStorm, user, true)
+    next score
+  }
+)
+
+#===============================================================================
+#
+#===============================================================================
 Battle::AI::Handlers::MoveFailureCheck.copy("StartSunWeather",
                                             "StartHailWeather")
 Battle::AI::Handlers::MoveEffectScore.add("StartHailWeather",

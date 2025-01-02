@@ -487,7 +487,7 @@ class SafariBattle
             pbDisplay(_INTL("{1} is watching carefully!", pkmn.name))
           end
           # Weather continues
-          weather_data = GameData::BattleWeather.try_get(@weather)
+          weather_data = GameData::.try_get(@weather)
           @scene.pbCommonAnimation(weather_data.animation) if weather_data
         end
         break if @decision > 0

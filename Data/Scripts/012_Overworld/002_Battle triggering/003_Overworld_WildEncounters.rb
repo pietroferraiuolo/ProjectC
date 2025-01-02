@@ -156,6 +156,11 @@ class PokemonEncounters
             encounter_chance /= 2
             min_steps_needed *= 2
           end
+        when :DIVINESTORM
+          if GameData::Weather.get($game_screen.weather_type).category == :DivineStorm
+            encounter_chance /= 2
+            min_steps_needed *= 2
+          end
         when :SWARM
           encounter_chance *= 1.5
           min_steps_needed /= 2
@@ -443,7 +448,6 @@ def pbGenerateWildPokemon(species, level, isRoamer = false)
     end
   end
   # Trigger events that may alter the generated Pokémon further
-  genwildpoke.form_simple = genwildpoke.form if MultipleForms.hasFunction?(genwildpoke.species, "getForm")
   EventHandlers.trigger(:on_wild_pokemon_created, genwildpoke)
   return genwildpoke
 end

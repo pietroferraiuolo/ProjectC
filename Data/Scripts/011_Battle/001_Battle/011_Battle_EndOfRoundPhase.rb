@@ -35,6 +35,7 @@ class Battle
     when :HeavyRain   then pbDisplay(_INTL("It is raining heavily."))
     when :StrongWinds then pbDisplay(_INTL("The wind is strong."))
     when :ShadowSky   then pbDisplay(_INTL("The shadow sky continues."))
+    when :DivineStorm then pbDisplay(_INTL("The lightning storm continues."))
     end
     # Effects due to weather
     priority.each do |battler|
@@ -45,7 +46,25 @@ class Battle
       end
       # Weather damage
       pbEORWeatherDamage(battler)
+      # Weather healing
+      pbEORWeatherHealing(battler)
     end
+  end
+
+  def pbEORWeatherHealing(battler)
+    return if battler.fainted?
+    amt = 0
+    case battler.effectiveWeather
+    when :DivineStorm
+      if battler.hasActiveAbility?(:VOLTABSORB)
+        pbDisplay(_INTL("{1} is healed by the lightnings!", battler.pbThis))
+        amt = battler.totalhp / 16
+      end
+    end
+    return if amt <= 0
+    @scene.pbAnimation(battler)
+    battler.pbRecoverHP(amt) if amt > 0
+    battler.pbItemHPHealCheck
   end
 
   def pbEORWeatherDamage(battler)
@@ -63,6 +82,10 @@ class Battle
     when :ShadowSky
       return if !battler.takesShadowSkyDamage?
       pbDisplay(_INTL("{1} is hurt by the shadow sky!", battler.pbThis))
+      amt = battler.totalhp / 16
+    when :DivineStorm
+      return if !battler.takesDivineStormDamage?
+      pbDisplay(_INTL("{1} is hurt by lighnings!", battler.pbThis))
       amt = battler.totalhp / 16
     end
     return if amt < 0

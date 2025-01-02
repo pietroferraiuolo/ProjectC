@@ -1,0 +1,4 @@
+#-------------------------------
+[DIVINESTORM]
+Name = Divine Storm
+Description = Summons a rain of lighting when joining the battle.

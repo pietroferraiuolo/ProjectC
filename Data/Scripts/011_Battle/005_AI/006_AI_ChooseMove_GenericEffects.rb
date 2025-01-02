@@ -621,6 +621,17 @@ class Battle::AI
         if b.battler.takesHailDamage?   # End of round damage
           ret += (b.opposes?(move_user)) ? 10 : -10
         end
+      when :DivineStorm
+        # Check for battlers affected by Divine Storm's effects
+        if b.battler.takesDivineStormDamage?   # End of round damage
+          ret += (b.opposes?(move_user)) ? 10 : -10
+        end
+        if b.has_damaging_move_of_type?(:ELECTRIC)
+          ret += (b.opposes?(move_user)) ? -10 : 10
+        end
+        if b.has_damaging_move_of_type?(:GROUND)
+          ret += (b.opposes?(move_user)) ? 10 : -10
+        end
       when :ShadowSky
         # Check for battlers affected by Shadow Sky's effects
         if b.has_damaging_move_of_type?(:SHADOW)
@@ -637,6 +648,7 @@ class Battle::AI
           :Rain      => [:DRYSKIN, :FORECAST, :HYDRATION, :RAINDISH, :SWIFTSWIM],
           :Sandstorm => [:SANDFORCE, :SANDRUSH, :SANDVEIL],
           :Hail      => [:FORECAST, :ICEBODY, :SLUSHRUSH, :SNOWCLOAK]
+          :DivineStorm=> [:LIGHTNINGROD, :VOLTABSORB]
         }[weather]
         if beneficial_abilities && beneficial_abilities.length > 0 &&
            b.has_active_ability?(beneficial_abilities)
@@ -664,6 +676,8 @@ class Battle::AI
                          "TypeAndPowerDependOnWeather"],
           :Hail      => ["FreezeTargetAlwaysHitsInHail",
                          "StartWeakenDamageAgainstUserSideIfHail",
+                         "TypeAndPowerDependOnWeather"],
+          :DivineStorm => ["ParalyzeTargetAlwaysHitsInRainHitsTargetInSky",
                          "TypeAndPowerDependOnWeather"],
           :ShadowSky => ["TypeAndPowerDependOnWeather"]
         }[weather]
