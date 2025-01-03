@@ -415,6 +415,11 @@ class Battle::Move
       when :WATER
         multipliers[:final_damage_multiplier] *= 1.5
       end
+    when :DivineStorm
+      case type
+      when :ELECTRIC
+        multipliers[:final_damage_multiplier] *= 1.5
+      end
     when :Sandstorm
       if target.pbHasType?(:ROCK) && specialMove? && @function_code != "UseTargetDefenseInsteadOfTargetSpDef"
         multipliers[:defense_multiplier] *= 1.5
@@ -422,10 +427,6 @@ class Battle::Move
     when :ShadowSky
       multipliers[:final_damage_multiplier] *= 1.5 if type == :SHADOW
     end
-    when :DivineStorm
-      case type
-      when :ELECTRIC
-        multipliers[:final_damage_multiplier] *= 1.5
     # Critical hits
     if target.damageState.critical
       if Settings::NEW_CRITICAL_HIT_RATE_MECHANICS

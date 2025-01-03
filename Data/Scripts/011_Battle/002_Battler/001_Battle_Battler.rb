@@ -366,8 +366,8 @@ class Battle::Battler
       # Form-changing abilities
       :BATTLEBOND,
       :DISGUISE,
-#      :FLOWERGIFT,                                        # This can be stopped
-#      :FORECAST,                                          # This can be stopped
+      #:FLOWERGIFT,                                        # This can be stopped
+      #:FORECAST,                                          # This can be stopped
       :GULPMISSILE,
       :ICEFACE,
       :MULTITYPE,
@@ -562,9 +562,10 @@ class Battle::Battler
     return false if !takesIndirectDamage?
     return false if pbHasType?(:ELECTRIC) || pbHasType?(:GROUND)
     return false if inTwoTurnAttack?("TwoTurnAttackInvulnerableUnderground")
-    return false if hasActiveAbility([:LIGHTNINGROD, :LEVITATE, :DIVINESTORM])
+    return false if hasActiveAbility?([:LIGHTNINGROD, :LEVITATE, :DIVINESTORM])
     return false if hasActiveItem?([:AIRBALLOON])
     return true
+  end
     
   def effectiveWeather
     ret = @battle.pbWeather

@@ -2712,6 +2712,12 @@ Battle::AbilityEffects::OnSwitchIn.add(:DRIZZLE,
   }
 )
 
+Battle::AbilityEffects::OnSwitchIn.add(:DIVINESTORM,
+  proc { |ability, battler, battle, switch_in|
+    battle.pbStartWeatherAbility(:DivineStorm, battler)
+  }
+)
+
 Battle::AbilityEffects::OnSwitchIn.add(:DROUGHT,
   proc { |ability, battler, battle, switch_in|
     battle.pbStartWeatherAbility(:Sun, battler)

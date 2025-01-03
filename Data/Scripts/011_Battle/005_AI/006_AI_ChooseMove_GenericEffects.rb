@@ -647,8 +647,8 @@ class Battle::AI
           :Sun       => [:CHLOROPHYLL, :FLOWERGIFT, :FORECAST, :HARVEST, :LEAFGUARD, :SOLARPOWER],
           :Rain      => [:DRYSKIN, :FORECAST, :HYDRATION, :RAINDISH, :SWIFTSWIM],
           :Sandstorm => [:SANDFORCE, :SANDRUSH, :SANDVEIL],
-          :Hail      => [:FORECAST, :ICEBODY, :SLUSHRUSH, :SNOWCLOAK]
-          :DivineStorm=> [:LIGHTNINGROD, :VOLTABSORB]
+          :Hail      => [:FORECAST, :ICEBODY, :SLUSHRUSH, :SNOWCLOAK],
+          :DivineStorm => [:LIGHTNINGROD, :VOLTABSORB]
         }[weather]
         if beneficial_abilities && beneficial_abilities.length > 0 &&
            b.has_active_ability?(beneficial_abilities)
