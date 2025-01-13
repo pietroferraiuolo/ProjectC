@@ -506,3 +506,5 @@ Combines Unnerve and Chilling Neigh Abilities.
 Combines Unnerve and Chilling Neigh Abilities.
 Combines Unnerve and Grim Neigh Abilities.
 Combines Unnerve and Grim Neigh Abilities.
+The pokémon Summons lightings rain in battle.
+Invoca una tempesta di fulmini in battaglia.
